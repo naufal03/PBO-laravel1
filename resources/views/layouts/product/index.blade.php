@@ -22,7 +22,7 @@
                                 <thead>
                                     <th>No</th>
                                     <th>Product Name</th>
-                                    <th>Description</th>
+                                    <th>Description table</th>
                                     <th>Price</th>
                                     <th>Stock</th>
                                     <th>Category Product</th>
