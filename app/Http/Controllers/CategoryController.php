@@ -24,7 +24,7 @@ class CategoryController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
         //
@@ -97,6 +97,6 @@ class CategoryController extends Controller
         //
         $ct = Category::find($id);
         $ct->delete();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index'); 
     }
 }

@@ -2,7 +2,6 @@
 @section('title')
     <title>Edit Category Page </title>
 @endsection
-
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -51,10 +50,8 @@
                                                 @if ($product->category_id == $cat->id)
                                                     <option value="{{ $cat->id }}" selected>{{ $cat->name_category }}
                                                     </option>
-
                                                 @else
                                                     <option value="{{ $cat->id }}">{{ $cat->name_category }}</option>
-
                                                 @endif
                                             @endforeach
                                         </select>

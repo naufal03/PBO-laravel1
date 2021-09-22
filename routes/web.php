@@ -18,7 +18,4 @@ Route::get('/', function () {
 });
 Route::resource('category', App\Http\Controllers\CategoryController::class);
 Route::resource('Product', App\Http\Controllers\ProductController::class);
-
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
