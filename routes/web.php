@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// ini route list componen 
+// ini route list componen
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 Route::resource('category', App\Http\Controllers\CategoryController::class);
 Route::resource('Product', App\Http\Controllers\ProductController::class);
