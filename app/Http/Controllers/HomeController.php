@@ -25,4 +25,8 @@ class HomeController extends Controller
   {
     return view('home');
   }
+  Public function adminPage()
+  {
+      return view('layyout.adminHome');
+  }
 }
