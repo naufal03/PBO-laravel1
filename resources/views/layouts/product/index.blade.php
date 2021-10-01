@@ -14,7 +14,7 @@
       <div class="col-12">
         <div class=" card card-primary">
           <div class="card-header">
-            <a href="{{ route('Product.create') }}" class="btn btn-primary"> Add Product</a>
+            <a href="{{ route('product.create') }}" class="btn btn-primary"> Add Product</a>
           </div>
           <div class="card-body">
             <div class="table table-responsive">
@@ -36,9 +36,9 @@
                     <td>{{ $pr->price }}</td>
                     <td>{{ $pr->stock }}</td>
                     <td>{{ $pr->category->name_category }}</td>
-                    <td><a href="{{ route('Product.edit', $pr->id) }}" class="btn btn-outline-warning"><i
+                    <td><a href="{{ route('product.edit', $pr->id) }}" class="btn btn-outline-warning"><i
                           class="fas fa-edit"></i></a>
-                      <form action="{{ route('Product.destroy', $pr->id) }}" method="post">
+                      <form action="{{ route('product.destroy', $pr->id) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger"><i class="fas fa-trash "></i></button>

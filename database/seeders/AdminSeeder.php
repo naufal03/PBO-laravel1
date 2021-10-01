@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\ProductController;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Product;
 
 class AdminSeeder extends Seeder
 {
@@ -31,6 +34,52 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('passwordkasir')
             ],
         ];
+        $categories = [
+            [
+                'name_category' => 'jacket',
+            ],
+            [
+                'name_category' => 'baju',
+            ],
+            [
+                'name_category' => 'baju muslim',
+            ],
+        ];
+        $products =[
+            [
+                'name_product' => 'baju muslim merek x',
+                'description' => 'anyar',
+                'stock' => 12,
+                'price' => 3000,
+                'category_id' => 2,
+
+            ],
+            [
+                'name_product' => 'jacket muslim merek x',
+                'description' => 'anyar',
+                'stock' => 12,
+                'price' => 3000,
+                'category_id' => 3,
+
+            ],
+            [
+                'name_product' => 'baju muslim x',
+                'description' => 'anyar',
+                'stock' => 12,
+                'price' => 3000,
+                'category_id' => 1,
+
+            ],
+        ];
+
+
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
+
+        foreach ($products as $product){
+            Product::create($product);
+        }
 
         foreach ($users as $user) {
             User::create($user);

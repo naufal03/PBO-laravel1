@@ -14,7 +14,8 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
-		//
+		//redirect to order page
+        return view('layouts.order.index');
 	}
 
 	/**

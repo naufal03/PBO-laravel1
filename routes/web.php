@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // ini route list componen
+
+
 Route::get('/', function () {
-	return view('welcome');
+    return redirect()->route('home');
 });
-
-
-
 Auth::routes();
 
-Route::resource('category', App\Http\Controllers\CategoryController::class);
-Route::resource('Product', App\Http\Controllers\ProductController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//rute baru
+Route::resource('category', App\Http\Controllers\CategoryController::class)->middleware('is_admin');
+
+//rute product
+Route::resource('product', App\Http\Controllers\ProductController::class)->middleware('is_admin');
+
+//rute order
+Route::resource('order', App\Http\Controllers\OrderController::class)->middleware('is_admin');
+
