@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Auth;
 class OrderController extends Controller
 {
 	/**
@@ -14,8 +15,10 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
+        //passing data product
+        $product = Product::all();
 		//redirect to order page
-        return view('layouts.order.index');
+        return view('layouts.order.index', compact('product'));
 	}
 
 	/**
@@ -34,9 +37,32 @@ class OrderController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(Request $r)
 	{
-		//
+		//jika product blm di pilih
+        if($r->product_id == 0){
+            return redirect()->route('order.index')->with('pesan','Anda Belum Memilih Product');
+        }
+        //melakukan pengecekan pada table order
+        $product_check = Order::where('id', $r->product_id)->where('status', '0')->first();
+        //ambil harga dari tabel product
+        $price = Product::where('id', $r->product_id)->first();
+        //kondisi pengecekan
+        if ($product_check == null) {
+            $order = new Order;
+            $order->product_id = $r->product_id;
+            $order->jumlah = $r->jumlah;
+        }
+        else{
+            $order = Order::where('product_id', $r->product_id)->where('status','0')->first();
+            $order->product_id = $r->product_id;
+            $order->jumlah += $r->jumlah;
+        }
+        $order->sub_total = $price->price * $r->jumlah;
+        $order->user_id = Auth::user()->id;
+        // return view('layouts.order.index');
+        $order->save();
+        dd($order);
 	}
 
 	/**

@@ -15,6 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // api
+        return Category::all();
         //passing data
         $category = Category::all();
         return view('layouts.category.index', compact('category'));
