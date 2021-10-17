@@ -66,21 +66,28 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>tes</td>
-                  </tr>
+                  @foreach ($cart as $carts)
+                    @foreach ($carts->cartproduct as $cp)
+                      <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $cp->name_product }}</td>
+                        <td>{{ $carts->jumlah }}</td>
+                        <td>{{ $carts->sub_total }}</td>
+                      </tr>
+                    @endforeach
+                  @endforeach
                 </tbody>
               </table>
             </div>
             <hr>
             <div class="text-right">
-              <p class="h5">
+             @if ($cart)
+             <p class="h5">
+                Total Harga : IDR {{$cart->sum('sub_total')}}
+             @else
+             <p class="h5">
                 Total Harga : IDR
-              </p>
+             @endif
             </div>
             <hr>
           </div>

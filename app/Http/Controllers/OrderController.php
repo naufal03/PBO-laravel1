@@ -17,8 +17,10 @@ class OrderController extends Controller
 	{
         //passing data product
         $product = Product::all();
+        //ambil data order berdasarkan user yang sedang login
+        $cart =Order::where('user_id', Auth::user()->id)->where('status', '0')->get();
 		//redirect to order page
-        return view('layouts.order.index', compact('product'));
+        return view('layouts.order.index', compact('product', 'cart'));
 	}
 
 	/**
@@ -40,29 +42,25 @@ class OrderController extends Controller
 	public function store(Request $r)
 	{
 		//jika product blm di pilih
-        if($r->product_id == 0){
-            return redirect()->route('order.index')->with('pesan','Anda Belum Memilih Product');
+        if ($r->product_id == 0) {
+            return redirect()->route('order.index')->with('pesan', 'Anda Belum Memilih Product');
         }
-        //melakukan pengecekan pada table order
-        $product_check = Order::where('id', $r->product_id)->where('status', '0')->first();
-        //ambil harga dari tabel product
+        $product_check = Order::where('product_id', $r->product_id)->where('status', '0')->first();
         $price = Product::where('id', $r->product_id)->first();
-        //kondisi pengecekan
         if ($product_check == null) {
             $order = new Order;
             $order->product_id = $r->product_id;
             $order->jumlah = $r->jumlah;
-        }
-        else{
-            $order = Order::where('product_id', $r->product_id)->where('status','0')->first();
+        } else {
+            $order = Order::where('product_id', $r->product_id)->where('status', '0')->first();
             $order->product_id = $r->product_id;
             $order->jumlah += $r->jumlah;
         }
-        $order->sub_total = $price->price * $r->jumlah;
+        $order->sub_total += $price->price * $r->jumlah;
         $order->user_id = Auth::user()->id;
-        // return view('layouts.order.index');
         $order->save();
-        dd($order);
+        return redirect()->route('order.index');
+        // dd($order);
 	}
 
 	/**
