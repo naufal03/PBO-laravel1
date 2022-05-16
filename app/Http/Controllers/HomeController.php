@@ -34,6 +34,6 @@ class HomeController extends Controller
   }
   Public function adminPage()
   {
-      return view('layyout.adminHome');
+      return view('layout.adminHome');
   }
 }

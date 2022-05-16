@@ -1,5 +1,5 @@
 @extends('master')
-
+{{-- test --}}
 @section('content')
   <section class="section">
     <div class="section-header">
